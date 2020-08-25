@@ -1,6 +1,7 @@
 package com.movieservice.dto;
 
 import com.movieservice.models.MovieItem;
+import com.movieservice.models.Payment;
 import com.movieservice.models.Rent;
 import com.movieservice.models.User;
 import com.movieservice.models.enums.RentStatus;
@@ -16,6 +17,15 @@ public class RentDTO {
     private double total;
     private int rentStatus;
     private UserDTO client;
+    private Payment payment;
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
 
     public UserDTO getClient() {
         return client;
@@ -40,6 +50,7 @@ public class RentDTO {
         this.items = rent.getItems();
         this.total = this.getTotal(rent);
         this.rentStatus = rent.getRentStatus().getCode();
+        this.payment = rent.getPayment();
     }
     public RentDTO(){ }
 

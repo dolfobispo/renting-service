@@ -20,6 +20,17 @@ public class Rent implements Serializable {
     @JoinColumn(name = "client_id")
     private User client;
 
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    @OneToOne(mappedBy = "rent",cascade = CascadeType.ALL)
+    private Payment payment;
+
     private RentStatus rentStatus;
 
     public RentStatus getRentStatus() {

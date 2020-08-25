@@ -19,6 +19,17 @@ public class Movie implements Serializable {
     private String overview;
     private String poster_path;
 
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
+    }
+
+    @OneToOne(mappedBy = "movie",cascade = CascadeType.ALL)
+    private Stock stock;
+
     public Double getRent_price() {
         return rent_price;
     }

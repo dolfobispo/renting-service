@@ -1,9 +1,6 @@
 package com.movieservice.config;
 
-import com.movieservice.models.Movie;
-import com.movieservice.models.MovieItem;
-import com.movieservice.models.Rent;
-import com.movieservice.models.User;
+import com.movieservice.models.*;
 import com.movieservice.repositories.MovieItemRepository;
 import com.movieservice.repositories.MovieRepository;
 import com.movieservice.repositories.RentRepository;
@@ -74,6 +71,22 @@ public class TestConfig implements CommandLineRunner,WebMvcConfigurer {
         Movie m8 = new Movie(null,"Os Croods","Família da pré-história vê sua caverna ser destruída. Depois disso, os Croods partem em uma" +
                 " aventura em busca de um novo lugar para morar, liderados por um garoto muito imaginativo que lhes ajuda a desbravar um mundo inteiramente novo.", "the-croods.jpg",2.99);
 
+        Stock s1 = new Stock(null,m1,5);
+        Stock s2 = new Stock(null,m2,10);
+        Stock s3 = new Stock(null,m3,36);
+        Stock s4 = new Stock(null,m4,7);
+        Stock s5 = new Stock(null,m5,2);
+        Stock s6 = new Stock(null,m6,48);
+        Stock s7 = new Stock(null,m7,13);
+        Stock s8 = new Stock(null,m8,1);
+        m1.setStock(s1);
+        m2.setStock(s2);
+        m3.setStock(s3);
+        m4.setStock(s4);
+        m5.setStock(s5);
+        m6.setStock(s6);
+        m7.setStock(s7);
+        m8.setStock(s8);
 
         movieRepository.saveAll(Arrays.asList(m1,m2,m3,m4,m5,m6,m7,m8));
 
