@@ -1,6 +1,5 @@
 package com.movieservice.services;
 
-import com.movieservice.models.Rent;
 import com.movieservice.models.Stock;
 import org.springframework.stereotype.Service;
 

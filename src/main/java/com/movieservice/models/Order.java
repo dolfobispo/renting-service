@@ -1,6 +1,5 @@
 package com.movieservice.models;
 
-import com.movieservice.dto.UserDTO;
 import com.movieservice.models.enums.RentStatus;
 
 import javax.persistence.*;
@@ -11,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_rent")
-public class Rent implements Serializable {
+public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,7 +27,7 @@ public class Rent implements Serializable {
         this.payment = payment;
     }
 
-    @OneToOne(mappedBy = "rent",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "order",cascade = CascadeType.ALL)
     private Payment payment;
 
     private RentStatus rentStatus;
@@ -49,14 +48,14 @@ public class Rent implements Serializable {
         this.client = client;
     }
 
-    @OneToMany(mappedBy = "id.rent",fetch = FetchType.EAGER)
-    private Set<MovieItem> items = new HashSet<>();
+    @OneToMany(mappedBy = "id.order",fetch = FetchType.EAGER)
+    private Set<ProductItem> items = new HashSet<>();
 
-    public Set<MovieItem> getItems() {
+    public Set<ProductItem> getItems() {
         return items;
     }
 
-    public void setItems(Set<MovieItem> items) {
+    public void setItems(Set<ProductItem> items) {
         this.items = items;
     }
 
@@ -76,10 +75,10 @@ public class Rent implements Serializable {
         this.moment = moment;
     }
 
-    public Rent(){
+    public Order(){
 
     }
-    public Rent(Long id, Instant moment, User client) {
+    public Order(Long id, Instant moment, User client) {
         this.id = id;
         this.moment = moment;
         this.client = client;
@@ -87,8 +86,8 @@ public class Rent implements Serializable {
     }
     public double getTotal(){
         double sum = 0.0;
-        for(MovieItem movieItem: items){
-            sum +=movieItem.getSubTotal();
+        for(ProductItem productItem : items){
+            sum += productItem.getSubTotal();
         }
         return sum;
     }

@@ -30,5 +30,9 @@ public class UserController {
     public ResponseEntity<UserDTO> findUserByEmailAndPassword(@RequestBody User user){
         return ResponseEntity.ok(UserDTO.get(userService.findUserByEmailAndPassword(user)));
     }
+    @GetMapping
+    public ResponseEntity<UserDTO>findUserByCpf(@RequestParam String cpf){
+        return ResponseEntity.ok(UserDTO.get(userService.findUserByCpf(cpf)));
+    }
 
 }

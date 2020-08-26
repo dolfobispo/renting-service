@@ -15,6 +15,16 @@ public class User implements Serializable {
     @Size(min = 3, max = 10, message = "Nome deve conter entre 3 e 10 caracteres")
     @NotBlank(message = "O nome deve ser preenchido")
     private String name;
+    private String lastName;
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,15 +39,16 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "client")
     @JsonIgnore
-    private List<Rent> rents = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
 
-    public List<Rent> getRents() {
-        return rents;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public User(Long id, String name, String cpf, String email, String password) {
+    public User(Long id, String name, String lastName, String cpf, String email, String password) {
         this.name = name;
         this.id = id;
+        this.lastName = lastName;
         this.cpf = cpf;
         this.email = email;
         this.password = password;

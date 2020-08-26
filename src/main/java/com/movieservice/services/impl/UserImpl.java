@@ -31,4 +31,9 @@ public class UserImpl implements UserService {
         return repository.findUserByEmailAndPassword(user.getEmail(),user.getPassword()).orElseThrow(()->new ResourceNotFoundException(0l));
     }
 
+    @Override
+    public User findUserByCpf(String cpf) {
+       return repository.findUserByCpf(cpf).orElseThrow(()->new ResourceNotFoundException(0l));
+    }
+
 }

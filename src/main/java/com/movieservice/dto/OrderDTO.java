@@ -1,19 +1,17 @@
 package com.movieservice.dto;
 
-import com.movieservice.models.MovieItem;
+import com.movieservice.models.ProductItem;
 import com.movieservice.models.Payment;
-import com.movieservice.models.Rent;
-import com.movieservice.models.User;
-import com.movieservice.models.enums.RentStatus;
+import com.movieservice.models.Order;
 
 import java.time.Instant;
 import java.util.Set;
 
-public class RentDTO {
+public class OrderDTO {
 
     private Long id;
     private Instant moment;
-    private Set<MovieItem> items;
+    private Set<ProductItem> items;
     private double total;
     private int rentStatus;
     private UserDTO client;
@@ -43,16 +41,16 @@ public class RentDTO {
         this.rentStatus = rentStatus;
     }
 
-    public RentDTO(Rent rent) {
-        this.id = rent.getId();
-        this.moment = rent.getMoment();
-        this.client = UserDTO.getUserRentDTO(rent.getClient());
-        this.items = rent.getItems();
-        this.total = this.getTotal(rent);
-        this.rentStatus = rent.getRentStatus().getCode();
-        this.payment = rent.getPayment();
+    public OrderDTO(Order order) {
+        this.id = order.getId();
+        this.moment = order.getMoment();
+        this.client = UserDTO.getUserRentDTO(order.getClient());
+        this.items = order.getItems();
+        this.total = this.getTotal(order);
+        this.rentStatus = order.getRentStatus().getCode();
+        this.payment = order.getPayment();
     }
-    public RentDTO(){ }
+    public OrderDTO(){ }
 
 
     public Long getId() {
@@ -72,16 +70,16 @@ public class RentDTO {
     }
 
 
-    public Set<MovieItem> getItems() {
+    public Set<ProductItem> getItems() {
         return items;
     }
 
-    public void setItems(Set<MovieItem> items) {
+    public void setItems(Set<ProductItem> items) {
         this.items = items;
     }
 
-    public static RentDTO get (Rent rent){
-        return new RentDTO(rent);
+    public static OrderDTO get (Order order){
+        return new OrderDTO(order);
     }
 
     public void setTotal(double total) {
@@ -92,8 +90,8 @@ public class RentDTO {
         return total;
     }
 
-    public double getTotal(Rent rent){
-        return rent.getTotal();
+    public double getTotal(Order order){
+        return order.getTotal();
     }
 
 }

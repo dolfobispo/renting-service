@@ -1,16 +1,16 @@
 package com.movieservice.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.movieservice.models.pk.MovieItemPK;
+import com.movieservice.models.pk.ProductItemPK;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tb_movie_item")
-public class MovieItem {
+@Table(name = "tb_product_item")
+public class ProductItem {
 
     @EmbeddedId
-    private MovieItemPK id = new MovieItemPK();
+    private ProductItemPK id = new ProductItemPK();
     private Integer quantity;
     private Double price;
 
@@ -29,26 +29,26 @@ public class MovieItem {
     public void setPrice(Double price) {
         this.price = price;
     }
-    public MovieItem(){}
-    public MovieItem(Rent rent, Movie movie , Integer quantity, Double price) {
-        this.id.setRent(rent);
-        this.id.setMovie(movie) ;
+    public ProductItem(){}
+    public ProductItem(Order order, Product product , Integer quantity, Double price) {
+        this.id.setOrder(order);
+        this.id.setProduct(product) ;
         this.quantity = quantity;
         this.price = price;
     }
     @JsonIgnore
-    public Rent getRent(){
-        return id.getRent();
+    public Order getOrder(){
+        return id.getOrder();
     }
-    public void setRent(Rent rent){
-        id.setRent(rent);
+    public void setOrder(Order order){
+        id.setOrder(order);
     }
     @Basic(fetch = FetchType.EAGER)
-    public Movie getMovie(){
-        return id.getMovie();
+    public Product getProduct(){
+        return id.getProduct();
     }
-    public void setMovie(Movie movie){
-        id.setMovie(movie);
+    public void setProduct(Product product){
+        id.setProduct(product);
     }
     public double getSubTotal(){
         return price * quantity;

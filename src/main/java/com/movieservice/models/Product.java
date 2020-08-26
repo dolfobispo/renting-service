@@ -5,8 +5,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 @Entity
-@Table(name = "tb_movie")
-public class Movie implements Serializable {
+@Table(name = "tb_product")
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +27,7 @@ public class Movie implements Serializable {
         this.stock = stock;
     }
 
-    @OneToOne(mappedBy = "movie",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "product",cascade = CascadeType.ALL)
     private Stock stock;
 
     public Double getRent_price() {
@@ -48,7 +48,7 @@ public class Movie implements Serializable {
         this.poster_path = poster_path;
     }
 
-    public Movie(){
+    public Product(){
 
     }
 
@@ -76,7 +76,7 @@ public class Movie implements Serializable {
         this.overview = overview;
     }
 
-    public Movie(Long id, String title, String overview, String poster_path,Double price) {
+    public Product(Long id, String title, String overview, String poster_path,Double price) {
         this.id = id;
         this.title = title;
         this.overview = overview;

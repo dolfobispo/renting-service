@@ -1,7 +1,6 @@
 package com.movieservice.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
@@ -13,7 +12,7 @@ public class Stock {
     @OneToOne
     @MapsId
     @JsonIgnore
-    private Movie movie;
+    private Product product;
     private Integer quantity;
 
     public Long getId() {
@@ -24,12 +23,12 @@ public class Stock {
         this.id = id;
     }
 
-    public Movie getMovie() {
-        return movie;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Integer getQuantity() {
@@ -42,9 +41,9 @@ public class Stock {
 
     public Stock(){
     }
-    public Stock(Long id, Movie movie, Integer quantity) {
+    public Stock(Long id, Product product, Integer quantity) {
         this.id = id;
-        this.movie = movie;
+        this.product = product;
         this.quantity = quantity;
     }
 }

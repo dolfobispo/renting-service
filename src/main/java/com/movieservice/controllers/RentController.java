@@ -1,8 +1,8 @@
 package com.movieservice.controllers;
 
-import com.movieservice.dto.RentDTO;
-import com.movieservice.models.Rent;
-import com.movieservice.services.RentService;
+import com.movieservice.dto.OrderDTO;
+import com.movieservice.models.Order;
+import com.movieservice.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,24 +17,24 @@ import java.util.stream.Collectors;
 public class RentController {
 
     @Autowired
-    private RentService rentService;
+    private OrderService orderService;
 
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<RentDTO> get(@PathVariable Long id){
-        Rent rent  = rentService.get(id);
-        return ResponseEntity.ok(RentDTO.get(rent));
+    public ResponseEntity<OrderDTO> get(@PathVariable Long id){
+        Order order = orderService.get(id);
+        return ResponseEntity.ok(OrderDTO.get(order));
     }
     @PostMapping
-    public ResponseEntity<RentDTO>save(@Valid @RequestBody Rent rent){
-        Rent rentResponse = rentService.save(rent);
-        return ResponseEntity.status(HttpStatus.CREATED).body(RentDTO.get(rentResponse));
+    public ResponseEntity<OrderDTO>save(@Valid @RequestBody Order order){
+        Order orderResponse = orderService.save(order);
+        return ResponseEntity.status(HttpStatus.CREATED).body(OrderDTO.get(orderResponse));
     }
     @GetMapping
-    public ResponseEntity<List<RentDTO>> getAll(){
-        List<RentDTO> rentDTOS = rentService.getAll()
+    public ResponseEntity<List<OrderDTO>> getAll(){
+        List<OrderDTO> orderDTOS = orderService.getAll()
                 .stream()
-                .map(rent -> RentDTO.get(rent)).collect(Collectors.toList());
-        return ResponseEntity.ok(rentDTOS);
+                .map(rent -> OrderDTO.get(rent)).collect(Collectors.toList());
+        return ResponseEntity.ok(orderDTOS);
     }
 }

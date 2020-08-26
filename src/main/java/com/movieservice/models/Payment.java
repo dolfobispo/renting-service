@@ -17,15 +17,15 @@ public class Payment implements Serializable {
     @OneToOne
     @MapsId
     @JsonIgnore
-    private Rent rent;
+    private Order order;
 
     public Payment(){
 
     }
-    public Payment(Long id, Instant moment, Rent rent) {
+    public Payment(Long id, Instant moment, Order order) {
         this.id = id;
         this.moment = moment;
-        this.rent = rent;
+        this.order = order;
     }
 
     public Long getId() {
@@ -44,12 +44,12 @@ public class Payment implements Serializable {
         this.moment = moment;
     }
 
-    public Rent getRent() {
-        return rent;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setRent(Rent rent) {
-        this.rent = rent;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     @Override

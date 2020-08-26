@@ -2,11 +2,8 @@ package com.movieservice.services.impl;
 
 import com.movieservice.exceptions.EntityAlreadyExitsException;
 import com.movieservice.exceptions.ResourceNotFoundException;
-import com.movieservice.models.Movie;
 import com.movieservice.models.Stock;
-import com.movieservice.repositories.MovieRepository;
 import com.movieservice.repositories.StockRepository;
-import com.movieservice.services.MovieService;
 import com.movieservice.services.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
