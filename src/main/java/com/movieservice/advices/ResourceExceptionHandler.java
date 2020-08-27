@@ -4,6 +4,7 @@ package com.movieservice.advices;
 import com.movieservice.exceptions.DatabaseException;
 import com.movieservice.exceptions.EntityAlreadyExitsException;
 import com.movieservice.exceptions.ResourceNotFoundException;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -18,6 +19,7 @@ import java.util.Map;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
+
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<StandError> resourceNotFound(ResourceNotFoundException ex, HttpServletRequest httpServletRequest){
         String error = "Resource not found";
