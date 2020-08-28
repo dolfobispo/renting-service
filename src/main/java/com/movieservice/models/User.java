@@ -1,6 +1,8 @@
 package com.movieservice.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -34,15 +36,15 @@ public class User implements Serializable {
     @NotBlank(message = "O e-mail deve ser preenchido")
     private String email;
     @NotBlank(message = "A senha deve ser preenchida")
-
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @OneToMany(mappedBy = "client")
     @JsonIgnore
-    private List<Order> orders = new ArrayList<>();
+    private List<Rent> rents = new ArrayList<>();
 
-    public List<Order> getOrders() {
-        return orders;
+    public List<Rent> getRents() {
+        return rents;
     }
 
     public User(Long id, String name, String lastName, String cpf, String email, String password) {

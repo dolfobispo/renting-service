@@ -1,5 +1,6 @@
 package com.movieservice.dto;
 
+import com.movieservice.models.Rent;
 import com.movieservice.models.User;
 
 import java.io.Serializable;
@@ -40,9 +41,13 @@ public class UserDTO  implements Serializable {
         this.name = name;
     }
 
-    private List<OrderDTO> rents;
+    private List<Rent> rents;
 
-    public List<OrderDTO> getRents() {
+    public void setRents(List<Rent> rents) {
+        this.rents = rents;
+    }
+
+    public List<Rent> getRents() {
         return rents;
     }
 
@@ -70,9 +75,7 @@ public class UserDTO  implements Serializable {
         this.name = user.getName();
         this.cpf = user.getCpf();
         this.lastName = user.getLastName();
-        List<OrderDTO> orderDTOS = user.getOrders().stream().
-                map(rent -> OrderDTO.get(rent)).collect(Collectors.toList());
-        this.rents = orderDTOS;
+        this.rents = user.getRents();
     }
 
     public static UserDTO get(User user){

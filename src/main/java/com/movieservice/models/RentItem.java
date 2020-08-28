@@ -4,10 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.movieservice.models.pk.ProductItemPK;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "tb_product_item")
-public class ProductItem {
+@Table(name = "tb_rent_item")
+public class RentItem implements Serializable {
 
     @EmbeddedId
     private ProductItemPK id = new ProductItemPK();
@@ -29,21 +30,21 @@ public class ProductItem {
     public void setPrice(Double price) {
         this.price = price;
     }
-    public ProductItem(){}
-    public ProductItem(Order order, Product product , Integer quantity, Double price) {
-        this.id.setOrder(order);
+    public RentItem(){}
+    public RentItem(Rent rent, Product product , Integer quantity, Double price) {
+        this.id.setRent(rent);
         this.id.setProduct(product) ;
         this.quantity = quantity;
         this.price = price;
     }
     @JsonIgnore
-    public Order getOrder(){
-        return id.getOrder();
+    public Rent getRent(){
+        return id.getRent();
     }
-    public void setOrder(Order order){
-        id.setOrder(order);
+    public void setRent(Rent rent){
+        id.setRent(rent);
     }
-    @Basic(fetch = FetchType.EAGER)
+
     public Product getProduct(){
         return id.getProduct();
     }

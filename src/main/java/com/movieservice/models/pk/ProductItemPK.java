@@ -1,7 +1,7 @@
 package com.movieservice.models.pk;
 
 import com.movieservice.models.Product;
-import com.movieservice.models.Order;
+import com.movieservice.models.Rent;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,18 +9,18 @@ import java.io.Serializable;
 @Embeddable
 public class ProductItemPK implements Serializable {
     @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @JoinColumn(name = "rent_id")
+    private Rent rent;
     @ManyToOne
     @JoinColumn(name  = "product_id")
     private Product product;
 
-    public Order getOrder() {
-        return order;
+    public Rent getRent() {
+        return rent;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setRent(Rent rent) {
+        this.rent = rent;
     }
 
     public Product getProduct() {
