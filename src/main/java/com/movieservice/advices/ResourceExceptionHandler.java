@@ -7,12 +7,15 @@ import com.movieservice.exceptions.ResourceNotFoundException;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,5 +62,12 @@ public class ResourceExceptionHandler {
         HttpStatus  status = HttpStatus.BAD_REQUEST;
         InvalidFieldError invalidFieldError = new InvalidFieldError(Instant.now(),status.value(),error,errors,httpServletRequest.getRequestURI());
         return ResponseEntity.status(status).body(invalidFieldError);
+    }
+    @ExceptionHandler(TransactionSystemException.class)
+    public ResponseEntity<ConstraintViolationError> constraintViolation
+            (ConstraintViolation cv,HttpServletRequest httpServletRequest){
+            HttpStatus status = HttpStatus.BAD_REQUEST;
+            ConstraintViolationError cvr = new ConstraintViolationError(status,cv.getMessage(),cv.getInvalidValue().toString());
+            return ResponseEntity.status(status).body(cvr);
     }
 }

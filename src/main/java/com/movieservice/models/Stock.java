@@ -2,6 +2,8 @@ package com.movieservice.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+
 
 @Entity
 @Table(name = "tb_stock")
@@ -13,6 +15,7 @@ public class Stock {
     @MapsId
     @JsonIgnore
     private Product product;
+    @Min(value = 0, message = "Product not available")
     private Integer quantity;
 
     public Long getId() {

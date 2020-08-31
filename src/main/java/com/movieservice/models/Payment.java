@@ -1,6 +1,7 @@
 package com.movieservice.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.movieservice.models.enums.PaymentMethod;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,18 +15,29 @@ public class Payment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Instant moment;
+
     @OneToOne
     @MapsId
     @JsonIgnore
     private Rent rent;
 
-    public Payment(){
+    private PaymentMethod paymentMethod;
 
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
     }
-    public Payment(Long id, Instant moment, Rent rent) {
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public Payment(){
+        this.moment = Instant.now();
+    }
+    public Payment(Long id, Instant moment,PaymentMethod paymentMethod) {
         this.id = id;
         this.moment = moment;
-        this.rent = rent;
+        this.paymentMethod = paymentMethod;
     }
 
     public Long getId() {

@@ -38,7 +38,7 @@ public class Product implements Serializable {
     }
 
     @OneToOne(mappedBy = "product",cascade = CascadeType.ALL)
-    Stock stock;
+    private Stock stock;
 
     public Product(){
 

@@ -1,7 +1,4 @@
 package com.movieservice.models;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.movieservice.models.enums.RentStatus;
 
 import javax.persistence.*;
@@ -31,6 +28,7 @@ public class Rent  implements Serializable {
     private Date returningDate;
     private RentStatus rentStatus;
     private Instant moment;
+    private final double  fine = 2; // hardcore for a while
     @OneToOne(mappedBy = "rent",cascade = CascadeType.ALL)
     private Payment payment;
 
@@ -96,21 +94,27 @@ public class Rent  implements Serializable {
 
     }
     public Rent(Long id, Date rentingDate, Date returningDate, RentStatus rentStatus,
-                Instant moment, Payment payment, User client) {
+                Instant moment, User client) {
         this.id = id;
         this.rentingDate = rentingDate;
         this.returningDate = returningDate;
         this.rentStatus = rentStatus;
         this.moment = moment;
-        this.payment = payment;
         this.client = client;
     }
-
-    public double getTotal(){
+    public double getTaxes(){
+        Long differenceTime = this.returningDate.getTime() - this.rentingDate.getTime();
+        Double differenceDays = Math.ceil(differenceTime / (1000 * 3600 * 24) -2);
+        return differenceDays * fine;
+    }
+    public double getSubTotal(){
         double sum = 0.0;
         for(RentItem rentItem : items){
             sum += rentItem.getSubTotal();
         }
         return sum;
+    }
+    public double getTotal(){
+        return this.getSubTotal() + getTaxes();
     }
 }

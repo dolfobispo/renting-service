@@ -1,6 +1,7 @@
 package com.movieservice.config;
 
 import com.movieservice.models.*;
+import com.movieservice.models.enums.PaymentMethod;
 import com.movieservice.models.enums.RentStatus;
 import com.movieservice.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +68,7 @@ public class TestConfig implements CommandLineRunner,WebMvcConfigurer {
         Movie m8 = new Movie(null,"Os Croods","Família da pré-história vê sua caverna ser destruída. Depois disso, os Croods partem em uma" +
                 " aventura em busca de um novo lugar para morar, liderados por um garoto muito imaginativo que lhes ajuda a desbravar um mundo inteiramente novo.", "the-croods.jpg",7.0);
 
-        Stock s1 = new Stock(null,m1,0);
+        Stock s1 = new Stock(null,m1,1);
         Stock s2 = new Stock(null,m2,10);
         Stock s3 = new Stock(null,m3,36);
         Stock s4 = new Stock(null,m4,7);
@@ -84,9 +85,14 @@ public class TestConfig implements CommandLineRunner,WebMvcConfigurer {
         m7.setStock(s7);
         m8.setStock(s8);
 
+        Rent r1 = new Rent(null,new Date(),new Date(), RentStatus.RENTED,Instant.now(),user);
+        Rent r2 = new Rent(null,new Date(),new Date(), RentStatus.RENTED,Instant.now(),user2);
 
-        Rent r1 = new Rent(null,new Date(),new Date(), RentStatus.RENTED,Instant.now(),null,user);
-        Rent r2 = new Rent(null,new Date(),new Date(), RentStatus.RENTED,Instant.now(),null,user2);
+        Payment p1 = new Payment(null, Instant.now(),PaymentMethod.CASH);
+        Payment p2 = new Payment(null, Instant.now(),PaymentMethod.CARD);
+
+       p1.setRent(r1);
+       p2.setRent(r2);
 
         RentItem mi1 = new RentItem(r1, m1, 1, m1.getPrice());
         RentItem mi2 = new RentItem(r1, m2, 1, m2.getPrice());
